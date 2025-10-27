@@ -1,0 +1,15 @@
+<header class="site-header">
+  <div class="container">
+    <h1>{{ appTitle }}</h1> <!-- Інтерполяція -->
+  </div>
+</header>
+
+<main class="site-main">
+  <router-outlet></router-outlet> <!-- Місце для сторінок -->
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>© {{ currentYear }} — {{ appTitle }}</p>
+  </div>
+</footer>

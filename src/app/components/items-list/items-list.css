@@ -2,5 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap; /* дозволяє переходити на новий ряд */
+  gap: 20px; /* відстань між картками */
   min-height: 70vh; /* щоб не прилипало до футера */
+  padding: 40px 0;
+  background-color: #f5f6fa; /* легкий фон для контрасту */
 }

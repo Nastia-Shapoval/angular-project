@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NewsItem } from '../../shared/models/news.model';
 import { ItemCard } from '../item-card/item-card';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-items-list',
   standalone: true,
-  imports: [ItemCard],
+  imports: [CommonModule, ItemCard],
   templateUrl: './items-list.html',
   styleUrl: './items-list.css',
 })

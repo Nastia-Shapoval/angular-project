@@ -1,46 +1,15 @@
-/* Загальний стиль сторінки */
 :host {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9fafb;
-  color: #333;
-  margin: 0;
+  min-height: 100vh; /* сторінка займає весь екран */
 }
 
-/* Хедер */
-.site-header {
-  background-color: #1e293b;
-  color: white;
-  padding: 15px 0;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* Основна частина */
-.site-main {
-  flex: 1;
-  padding: 20px;
-}
-
-/* Футер */
-.site-footer {
-  background-color: #1e293b;
-  color: white;
-  text-align: center;
-  padding: 10px 0;
-  box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
-  width: 100%;
-  margin-top: auto;
-}
-
-/* Вирівнювання контейнера */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
+/* головний блок сторінки */
+main {
+  flex: 1; /* займає увесь простір між хедером і футером */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f5; /* світлий фон */
+  padding: 40px 0; /* відступи зверху і знизу, щоб не прилипало */
 }

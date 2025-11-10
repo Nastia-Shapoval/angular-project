@@ -1,0 +1,6 @@
+.news-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; /* щоб не прилипало до футера */
+}

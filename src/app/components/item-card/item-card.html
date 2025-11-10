@@ -1,7 +1,7 @@
-<div class="item-card"
-     [ngClass]="{ 'highlight': newsItem.id === 4 }"
-     [ngStyle]="{ 'border-color': newsItem.id === 1 ? '#007bff' : '#ccc' }">
-
+<div
+  class="item-card"
+  [ngClass]="{ 'popular': newsItem.views > 4000 }"
+>
   @if (newsItem) {
     <img
       ngSrc="{{ newsItem.imageUrl }}"
@@ -9,13 +9,15 @@
       width="300"
       height="200"
     />
-  }
 
-  <h3>{{ newsItem.title }}</h3>
-  <p>{{ newsItem.description }}</p>
-  <span>Дата: {{ newsItem.date }}</span>
+    <h3>{{ newsItem.title }}</h3>
+    <p>{{ newsItem.description }}</p>
+    <span>Дата: {{ newsItem.date }}</span>
+    <br />
+    <small>Переглядів: {{ newsItem.views }}</small>
 
-  @if (newsItem.id === 1) {
-    <span class="badge">🔥 Популярне</span>
+    @if (newsItem.views > 4000) {
+      <span class="badge">🔥 Популярне</span>
+    }
   }
 </div>

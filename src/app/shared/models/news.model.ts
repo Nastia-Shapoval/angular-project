@@ -4,4 +4,5 @@ export interface NewsItem {
   description: string; // Короткий опис
   imageUrl: string;    // Посилання на зображення
   date: string;        // Дата публікації
+  views: number;       // кількість переглядів новини
 }

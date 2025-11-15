@@ -1,14 +1,23 @@
-<div class="item-card">
-  <img
-    ngSrc="assets/news/apple-m5.jpg"
-    alt="Apple презентувала новий чип M5"
-    width="300"
-    height="300"
-  />
-  <h3>Apple презентувала новий чип M5</h3>
-  <p>
-    Компанія Apple представила процесор M5, який став у 2,5 рази швидшим за
-    попередній M4 та має покращене енергоспоживання.
-  </p>
-  <span>Дата: 2025-10-28</span>
+<div
+  class="item-card"
+  [ngClass]="{ 'popular': newsItem.views > 4000 }"
+>
+  @if (newsItem) {
+    <img
+      ngSrc="{{ newsItem.imageUrl }}"
+      [alt]="newsItem.title"
+      width="300"
+      height="200"
+    />
+
+    <h3>{{ newsItem.title }}</h3>
+    <p>{{ newsItem.description }}</p>
+    <span>Дата: {{ newsItem.date }}</span>
+    <br />
+    <small>Переглядів: {{ newsItem.views }}</small>
+
+    @if (newsItem.views > 4000) {
+      <span class="badge">🔥 Популярне</span>
+    }
+  }
 </div>

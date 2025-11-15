@@ -1,3 +1,5 @@
 <div class="news-list">
-  <app-item-card></app-item-card>
+  @for (item of news; track item.id) {
+    <app-item-card [newsItem]="item"></app-item-card>
+  }
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NewsItem } from '../../shared/models/news.model';
 
@@ -11,5 +11,10 @@ import { NewsItem } from '../../shared/models/news.model';
 })
 export class ItemCard {
   @Input() newsItem!: NewsItem;
-}
 
+  @Output() select = new EventEmitter<NewsItem>();
+
+  onSelect() {
+    this.select.emit(this.newsItem);
+  }
+}

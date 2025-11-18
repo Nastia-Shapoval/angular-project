@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {NewsItem} from '../models/news.model';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,20 @@ export class NewsService {
       views: 1200,
     },
   ];
-  getItems(): NewsItem[] {
-    return this.newsData;
+
+  private newsSubject = new BehaviorSubject<NewsItem[]>(this.newsData);
+
+  news$ = this.newsSubject.asObservable();
+
+  getItems(): Observable<NewsItem[]> {
+    return of(this.newsData);
+  }
+
+  filterNews(search: string): void {
+    const filtered = this.newsData.filter(item =>
+      item.title.toLowerCase().includes(search.toLowerCase())
+    );
+
+    this.newsSubject.next(filtered);
   }
 }

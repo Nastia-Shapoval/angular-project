@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NewsItem } from '../../shared/models/news.model';
 import { ItemCard } from '../item-card/item-card';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NewsService } from '../../shared/services/news';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-items-list',
@@ -12,33 +13,41 @@ import { NewsService } from '../../shared/services/news';
   templateUrl: './items-list.html',
   styleUrl: './items-list.css',
 })
-export class ItemsList implements OnInit {
+export class ItemsList implements OnInit, OnDestroy {
   searchTermInput: string = "";
   searchTerm: string = "";
   searchPerformed = false;
 
   selectedItem: NewsItem | null = null;
-
   news: NewsItem[] = [];
+
+  private destroy$ = new Subject<void>();
 
   constructor(private newsService: NewsService) {}
 
   ngOnInit(): void {
-    this.news = this.newsService.getItems();
+    this.newsService.news$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(items => {
+        this.news = items;
+      });
+
+    this.newsService.filterNews("");
   }
 
-  performSearch() {
+  performSearch(): void {
     this.searchTerm = this.searchTermInput;
     this.searchPerformed = true;
+
+    this.newsService.filterNews(this.searchTerm);
   }
 
-  get filteredNews(): NewsItem[] {
-    return this.news.filter(item =>
-      item.title.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-  }
-
-  handleSelect(item: NewsItem) {
+  handleSelect(item: NewsItem): void {
     this.selectedItem = item;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -13,12 +13,12 @@
 
 @if (searchPerformed) {
   <div class="search-result">
-    Результат пошуку: знайдено {{ filteredNews.length }} новин
+    Результат пошуку: знайдено {{ news.length }} новин
   </div>
 }
 
 <div class="news-list">
-  @for (item of filteredNews; track item.id) {
+  @for (item of news; track item.id) {
     <app-item-card
       [newsItem]="item"
       (select)="handleSelect($event)"
@@ -50,4 +50,3 @@
     </div>
   </div>
 }
-

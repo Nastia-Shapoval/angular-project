@@ -19,34 +19,6 @@
 
 <div class="news-list">
   @for (item of news; track item.id) {
-    <app-item-card
-      [newsItem]="item"
-      (select)="handleSelect($event)"
-    ></app-item-card>
+    <app-item-card [newsItem]="item"></app-item-card>
   }
 </div>
-
-@if (selectedItem) {
-  <div class="modal">
-    <div class="modal-content">
-      <span class="close" (click)="selectedItem = null">&times;</span>
-
-      <img
-        src="{{ selectedItem!.imageUrl }}"
-        [alt]="selectedItem!.title"
-        class="modal-img"
-      />
-
-      <h2>{{ selectedItem!.title }}</h2>
-
-      <p>{{ selectedItem!.description }}</p>
-
-      <p><strong>Дата:</strong> {{ selectedItem!.date }}</p>
-      <p><strong>Переглядів:</strong> {{ selectedItem!.views }}</p>
-
-      <button class="close-btn" (click)="selectedItem = null">
-        Закрити
-      </button>
-    </div>
-  </div>
-}

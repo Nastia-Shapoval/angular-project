@@ -18,7 +18,6 @@ export class ItemsList implements OnInit, OnDestroy {
   searchTerm: string = "";
   searchPerformed = false;
 
-  selectedItem: NewsItem | null = null;
   news: NewsItem[] = [];
 
   private destroy$ = new Subject<void>();
@@ -40,10 +39,6 @@ export class ItemsList implements OnInit, OnDestroy {
     this.searchPerformed = true;
 
     this.newsService.filterNews(this.searchTerm);
-  }
-
-  handleSelect(item: NewsItem): void {
-    this.selectedItem = item;
   }
 
   ngOnDestroy(): void {

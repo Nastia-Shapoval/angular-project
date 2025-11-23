@@ -1,0 +1,9 @@
+@if (item) {
+  <div class="details-container">
+    <img [src]="item.imageUrl" [alt]="item.title" />
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.description }}</p>
+    <p><b>Дата:</b> {{ item.date }}</p>
+    <p><b>Переглядів:</b> {{ item.views }}</p>
+  </div>
+}

@@ -1,5 +1,6 @@
 <div
   class="item-card"
+  hoverHighlight
   [ngClass]="{ 'popular': newsItem.views > 4000 }"
 >
   @if (newsItem) {
@@ -11,7 +12,7 @@
     />
 
     <h3>{{ newsItem.title }}</h3>
-    <p>{{ newsItem.description }}</p>
+    <p>{{ newsItem.description | truncate:100 }}</p>
     <span>Дата: {{ newsItem.date }}</span>
     <br />
     <small>Переглядів: {{ newsItem.views }}</small>
@@ -20,6 +21,9 @@
       <span class="badge">🔥 Популярне</span>
     }
 
-    <button class="details-btn" (click)="onSelect()">Детальніше</button>
+    <a class="details-btn" [routerLink]="['/items', newsItem.id]">
+      Детальніше
+    </a>
+
   }
 </div>

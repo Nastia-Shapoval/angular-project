@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NewsItem } from '../../shared/models/news.model';
+import { Component } from '@angular/core';
 import { ItemCard } from '../item-card/item-card';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NewsService } from '../../shared/services/news';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
+import { NewsItem } from '../../shared/models/news.model';
 
 @Component({
   selector: 'app-items-list',
@@ -13,41 +13,20 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './items-list.html',
   styleUrl: './items-list.css',
 })
-export class ItemsList implements OnInit, OnDestroy {
-  searchTermInput: string = "";
-  searchTerm: string = "";
+export class ItemsList {
+
+  searchTermInput: string = '';
   searchPerformed = false;
 
-  selectedItem: NewsItem | null = null;
-  news: NewsItem[] = [];
+  news$!: Observable<NewsItem[]>;
 
-  private destroy$ = new Subject<void>();
-
-  constructor(private newsService: NewsService) {}
-
-  ngOnInit(): void {
-    this.newsService.news$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(items => {
-        this.news = items;
-      });
-
-    this.newsService.filterNews("");
+  constructor(private newsService: NewsService) {
+    this.news$ = this.newsService.news$;
+    this.newsService.filterNews('');
   }
 
   performSearch(): void {
-    this.searchTerm = this.searchTermInput;
     this.searchPerformed = true;
-
-    this.newsService.filterNews(this.searchTerm);
-  }
-
-  handleSelect(item: NewsItem): void {
-    this.selectedItem = item;
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.newsService.filterNews(this.searchTermInput);
   }
 }

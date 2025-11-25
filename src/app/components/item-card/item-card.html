@@ -20,6 +20,9 @@
       <span class="badge">🔥 Популярне</span>
     }
 
-    <button class="details-btn" (click)="onSelect()">Детальніше</button>
+    <a class="details-btn" [routerLink]="['/items', newsItem.id]">
+      Детальніше
+    </a>
+
   }
 </div>

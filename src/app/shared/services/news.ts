@@ -55,6 +55,11 @@ export class NewsService {
     },
   ];
 
+  getItemById(id: number): NewsItem | null {
+    return this.newsData.find(item => item.id === id) || null;
+  }
+
+
   private newsSubject = new BehaviorSubject<NewsItem[]>(this.newsData);
 
   news$ = this.newsSubject.asObservable();

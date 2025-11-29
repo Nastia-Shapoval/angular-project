@@ -13,12 +13,12 @@
 
 @if (searchPerformed) {
   <div class="search-result">
-    Результат пошуку: знайдено {{ news.length }} новин
+    Результат пошуку: знайдено {{ (news$ | async)?.length }} новин
   </div>
 }
 
 <div class="news-list">
-  @for (item of news; track item.id) {
+  @for (item of news$ | async; track item.id) {
     <app-item-card [newsItem]="item"></app-item-card>
   }
 </div>

@@ -1,0 +1,42 @@
+<div class="form-container">
+  <h2>Додати новину</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <label>Заголовок</label>
+    <input type="text" formControlName="title">
+    @if (title?.invalid && title?.touched) {
+      <div class="error">Мінімальна довжина — 4 символи</div>
+    }
+
+    <label>Опис</label>
+    <textarea formControlName="description"></textarea>
+    @if (description?.invalid && description?.touched) {
+      <div class="error">Мінімальна довжина — 10 символів</div>
+    }
+
+    <label>URL зображення</label>
+    <input type="text" formControlName="imageUrl">
+    @if (imageUrl?.invalid && imageUrl?.touched) {
+      <div class="error">Поле не може бути пустим</div>
+    }
+
+    <label>Дата</label>
+    <input type="date" formControlName="date">
+    @if (date?.invalid && date?.touched) {
+      <div class="error">Виберіть дату</div>
+    }
+
+    <label>Перегляди</label>
+    <input type="number" formControlName="views">
+    @if (views?.invalid && views?.touched) {
+      <div class="error">Вкажіть число</div>
+    }
+
+    <button [disabled]="form.invalid" type="submit">
+      Додати
+    </button>
+
+  </form>
+</div>
+

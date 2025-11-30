@@ -55,6 +55,10 @@ export class NewsService {
     },
   ];
 
+  getItemById(id: number): NewsItem | null {
+    return this.newsData.find(item => item.id === id) || null;
+  }
+
   private newsSubject = new BehaviorSubject<NewsItem[]>(this.newsData);
 
   news$ = this.newsSubject.asObservable();
@@ -70,4 +74,15 @@ export class NewsService {
 
     this.newsSubject.next(filtered);
   }
+
+  addItem(item: any) {
+    const newItem = {
+      ...item,
+      id: Date.now()
+    };
+
+    this.newsData.push(newItem);
+    this.newsSubject.next(this.newsData);
+  }
+
 }

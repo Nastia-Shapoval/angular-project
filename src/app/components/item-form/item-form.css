@@ -1,0 +1,90 @@
+/* Контейнер форми */
+.form-container {
+  max-width: 520px;
+  margin: 30px auto;
+  padding: 30px;
+  background: #ffffff;
+
+  border-radius: 20px;
+  border: 1px solid rgba(0, 123, 255, 0.25);
+
+  box-shadow: 0 4px 18px rgba(0, 123, 255, 0.18);
+  transition: 0.25s;
+}
+
+.form-container:hover {
+  box-shadow: 0 6px 24px rgba(0, 123, 255, 0.27);
+}
+
+/* Заголовок */
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0056b3;
+  font-weight: 700;
+}
+
+/* Лейбли */
+label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #003f88;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Поля вводу */
+input,
+textarea {
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  font-size: 15px;
+
+  border: 1px solid #cfd8e3;
+  border-radius: 12px;
+
+  transition: 0.25s;
+  background: #f9fbff;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.35);
+  outline: none;
+  background: #ffffff;
+}
+
+/* Кнопка */
+button {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 17px;
+
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #007bff, #005dd1);
+  color: white;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+button:hover:not([disabled]) {
+  background: linear-gradient(135deg, #0068e8, #004bb1);
+  transform: scale(1.03);
+}
+
+button[disabled] {
+  background: #92b6e8;
+  cursor: not-allowed;
+}
+
+/* Повідомлення про помилку */
+.error {
+  color: #d30000;
+  font-size: 13px;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}

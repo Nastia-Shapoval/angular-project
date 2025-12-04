@@ -28,8 +28,13 @@ export class ItemForm {
       return;
     }
 
-    this.newsService.addItem(this.form.value);
-    alert('Новину додано!');
+    this.newsService.addItem(this.form.value).subscribe({
+      next: () => {
+        alert('Новину додано!');
+        this.newsService.loadNews();
+      },
+      error: (err) => alert(err.message)
+    });
   }
 
   get title() { return this.form.get('title'); }

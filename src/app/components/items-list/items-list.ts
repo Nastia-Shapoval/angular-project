@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ItemCard } from '../item-card/item-card';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,16 +14,19 @@ import { RouterLink } from '@angular/router';
   templateUrl: './items-list.html',
   styleUrl: './items-list.css',
 })
-export class ItemsList {
+export class ItemsList implements OnInit {
 
-  searchTermInput: string = '';
+  searchTermInput = '';
   searchPerformed = false;
 
   news$!: Observable<NewsItem[]>;
 
   constructor(private newsService: NewsService) {
     this.news$ = this.newsService.news$;
-    this.newsService.filterNews('');
+  }
+
+  ngOnInit(): void {
+    this.newsService.loadNews();
   }
 
   performSearch(): void {

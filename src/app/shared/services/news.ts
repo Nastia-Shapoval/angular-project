@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { NewsItem } from '../models/news.model';
 
 @Injectable({
@@ -15,18 +15,15 @@ export class NewsService {
 
   loadNews(): void {
     this.http.get<NewsItem[]>('/news')
-      .pipe(catchError(this.handleError))
       .subscribe(data => this.newsSubject.next(data));
   }
 
   getItemById(id: number): Observable<NewsItem> {
-    return this.http.get<NewsItem>(`/news/${id}`)
-      .pipe(catchError(this.handleError));
+    return this.http.get<NewsItem>(`/news/${id}`);
   }
 
   addItem(item: any): Observable<NewsItem> {
-    return this.http.post<NewsItem>('/news', item)
-      .pipe(catchError(this.handleError));
+    return this.http.post<NewsItem>('/news', item);
   }
 
   filterNews(search: string): void {
@@ -35,12 +32,5 @@ export class NewsService {
       item.title.toLowerCase().includes(search.toLowerCase())
     );
     this.newsSubject.next(filtered);
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    console.error('HTTP ERROR:', error);
-    return throwError(() =>
-      new Error('Сталася помилка при запиті до сервера 😢')
-    );
   }
 }

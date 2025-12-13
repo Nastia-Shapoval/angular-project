@@ -23,9 +23,8 @@ export class ItemDetails implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.newsService.getItemById(id).subscribe({
-      next: (data) => this.item = data,
-      error: (err) => console.error(err)
+    this.newsService.getItemById(id).subscribe(data => {
+      this.item = data;
     });
   }
 }

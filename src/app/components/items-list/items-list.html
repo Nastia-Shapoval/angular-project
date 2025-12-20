@@ -12,12 +12,20 @@
 </div>
 
 <div class="add-btn-wrapper">
-  <a routerLink="create" class="details-btn add-button">
+  <a
+    *ngIf="auth.isLoggedIn()"
+    routerLink="create"
+    class="details-btn add-button">
     ➕ Додати новину
   </a>
+
+  <button
+    *ngIf="!auth.isLoggedIn()"
+    disabled
+    class="details-btn add-button">
+    ➕ Додати новину
+  </button>
 </div>
-
-
 
 @if (searchPerformed) {
   <div class="search-result">

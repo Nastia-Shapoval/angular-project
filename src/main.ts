@@ -8,6 +8,7 @@ import { appConfig } from './app/app.config';
 
 import { baseUrlInterceptor } from './app/shared/interceptors/base-url-interceptor';
 import { errorInterceptor } from './app/shared/interceptors/error.interceptor';
+import {authTokenInterceptor} from './app/shared/interceptors/auth-token.interceptor';
 
 bootstrapApplication(App, {
   providers: [
@@ -15,7 +16,8 @@ bootstrapApplication(App, {
     provideHttpClient(
       withInterceptors([
         baseUrlInterceptor,
-        errorInterceptor
+        errorInterceptor,
+        authTokenInterceptor
       ])
     ),
     ...appConfig.providers

@@ -3,6 +3,7 @@ import { ItemCard } from '../item-card/item-card';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NewsService } from '../../shared/services/news';
+import { AuthService } from '../../shared/services/auth';
 import { Observable } from 'rxjs';
 import { NewsItem } from '../../shared/models/news.model';
 import { RouterLink } from '@angular/router';
@@ -21,7 +22,10 @@ export class ItemsList implements OnInit {
 
   news$!: Observable<NewsItem[]>;
 
-  constructor(private newsService: NewsService) {
+  constructor(
+    private newsService: NewsService,
+    public auth: AuthService
+  ) {
     this.news$ = this.newsService.news$;
   }
 

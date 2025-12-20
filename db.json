@@ -48,5 +48,22 @@
       "date": "2025-11-10",
       "views": 3600
     }
+  ],
+  "users": [
+    {
+      "id": "6935",
+      "email": "nastya@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "b2a8",
+      "email": "dima@gmail.com",
+      "password": "654321"
+    },
+    {
+      "id": "9690",
+      "email": "dima@gmail.com",
+      "password": "654321"
+    }
   ]
 }

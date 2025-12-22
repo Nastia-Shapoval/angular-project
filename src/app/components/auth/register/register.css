@@ -1,0 +1,51 @@
+
+
+/* Біле вікно */
+.auth-card {
+  background: white;
+  padding: 40px;
+  width: 360px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 100, 255, 0.15);
+  text-align: center;
+}
+
+/* Заголовок */
+.auth-card h2 {
+  margin-bottom: 25px;
+  color: #1a3d7c;
+}
+
+/* Поля вводу */
+.auth-card input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #c7dbff;
+  font-size: 14px;
+  outline: none;
+}
+
+.auth-card input:focus {
+  border-color: #4d8dff;
+  box-shadow: 0 0 0 2px rgba(77, 141, 255, 0.2);
+}
+
+/* Кнопка */
+.auth-card button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #4d8dff;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.auth-card button:hover {
+  background: #3a78e0;
+}

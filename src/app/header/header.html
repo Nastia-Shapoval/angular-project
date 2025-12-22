@@ -1,5 +1,21 @@
 <header class="site-header">
-  <div class="container">
-    <h1>{{ appTitle }}</h1>
+  <h1>{{ appTitle }}</h1>
+
+  <div class="auth-actions">
+    <a
+      *ngIf="!auth.isLoggedIn()"
+      routerLink="/login"
+      class="auth-btn"
+    >
+      Увійти
+    </a>
+
+    <button
+      *ngIf="auth.isLoggedIn()"
+      (click)="logout()"
+      class="auth-btn"
+    >
+      Вийти
+    </button>
   </div>
 </header>

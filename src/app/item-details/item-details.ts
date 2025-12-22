@@ -12,6 +12,7 @@ import { NewsItem } from '../shared/models/news.model';
   styleUrl: './item-details.css',
 })
 export class ItemDetails implements OnInit {
+
   item: NewsItem | null = null;
 
   constructor(
@@ -21,6 +22,9 @@ export class ItemDetails implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.item = this.newsService.getItemById(id);
+
+    this.newsService.getItemById(id).subscribe(data => {
+      this.item = data;
+    });
   }
 }

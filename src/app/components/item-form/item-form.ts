@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NewsService } from '../../shared/services/news';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-item-form',
@@ -20,16 +21,22 @@ export class ItemForm {
     views: new FormControl(0, Validators.required),
   });
 
-  constructor(private newsService: NewsService) {}
+  constructor(
+    private newsService: NewsService,
+    private notificationService: NotificationService
+  ) {}
 
-  submit() {
+  submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
-    this.newsService.addItem(this.form.value);
-    alert('Новину додано!');
+    this.newsService.addItem(this.form.value as any).subscribe(() => {
+      this.notificationService.showSuccess('Новину додано успішно');
+      this.newsService.loadNews();
+      this.form.reset();
+    });
   }
 
   get title() { return this.form.get('title'); }

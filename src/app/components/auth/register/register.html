@@ -1,0 +1,21 @@
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h2>Реєстрація</h2>
+
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="email"
+    />
+
+    <input
+      type="password"
+      placeholder="Пароль"
+      [(ngModel)]="password"
+    />
+
+    <button (click)="register()">
+      Зареєструватися
+    </button>
+  </div>
+</div>

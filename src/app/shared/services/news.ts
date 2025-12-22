@@ -1,88 +1,36 @@
 import { Injectable } from '@angular/core';
-import {NewsItem} from '../models/news.model';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { NewsItem } from '../models/news.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
 
-  private newsData: NewsItem[] = [
-    {
-      id: 1,
-      title: 'Apple презентувала новий чип M5',
-      description:
-        'Компанія Apple представила процесор M5, який став у 2,5 рази швидшим за попередній M4 та має покращене енергоспоживання.',
-      imageUrl: 'assets/news/apple-m5.jpg',
-      date: '2025-10-28',
-      views: 1800,
-    },
-    {
-      id: 2,
-      title: 'Google запустила штучний інтелект Gemini 2',
-      description:
-        'Оновлений AI Gemini 2 тепер інтегровано у всі сервіси Google, включаючи Gmail, Docs та Chrome.',
-      imageUrl: 'assets/news/gemini2.jpg',
-      date: '2025-10-20',
-      views: 4300,
-    },
-    {
-      id: 3,
-      title: 'Microsoft інтегрує Copilot у Windows 12',
-      description:
-        'Copilot стане центральним елементом нової операційної системи Windows 12, допомагаючи користувачам автоматизувати рутинні дії.',
-      imageUrl: 'assets/news/windows12.jpg',
-      date: '2025-09-30',
-      views: 2750,
-    },
-    {
-      id: 4,
-      title: 'OpenAI випустила GPT-5',
-      description:
-        'OpenAI представила модель GPT-5 із покращеним розумінням контексту, логіки та можливістю генерувати креативний контент із високою точністю.',
-      imageUrl: 'assets/news/gpt5.jpg',
-      date: '2025-09-15',
-      views: 5200,
-    },
-    {
-      id: 5,
-      title: 'Meta розробляє віртуальні офіси у метавсесвіті',
-      description:
-        'Meta тестує платформу Horizon Workspaces, яка дозволяє компаніям створювати власні віртуальні офіси для роботи з VR-окулярами.',
-      imageUrl: 'assets/news/meta-vr.jpg',
-      date: '2025-08-25',
-      views: 1200,
-    },
-  ];
-
-  getItemById(id: number): NewsItem | null {
-    return this.newsData.find(item => item.id === id) || null;
-  }
-
-  private newsSubject = new BehaviorSubject<NewsItem[]>(this.newsData);
-
+  private newsSubject = new BehaviorSubject<NewsItem[]>([]);
   news$ = this.newsSubject.asObservable();
 
-  getItems(): Observable<NewsItem[]> {
-    return of(this.newsData);
+  constructor(private http: HttpClient) {}
+
+  loadNews(): void {
+    this.http.get<NewsItem[]>('/news')
+      .subscribe(data => this.newsSubject.next(data));
+  }
+
+  getItemById(id: number): Observable<NewsItem> {
+    return this.http.get<NewsItem>(`/news/${id}`);
+  }
+
+  addItem(item: any): Observable<NewsItem> {
+    return this.http.post<NewsItem>('/news', item);
   }
 
   filterNews(search: string): void {
-    const filtered = this.newsData.filter(item =>
+    const current = this.newsSubject.getValue();
+    const filtered = current.filter(item =>
       item.title.toLowerCase().includes(search.toLowerCase())
     );
-
     this.newsSubject.next(filtered);
   }
-
-  addItem(item: any) {
-    const newItem = {
-      ...item,
-      id: Date.now()
-    };
-
-    this.newsData.push(newItem);
-    this.newsSubject.next(this.newsData);
-  }
-
 }

@@ -23,6 +23,11 @@
     "strictTemplates": true
   },
   "files": [],
+  "include": [
+    "src/**/*.ts",
+    "cypress/**/*.ts",         // <-- додати цю строку
+    "cypress.config.ts"        // <-- і сам конфіг
+  ],
   "references": [
     {
       "path": "./tsconfig.app.json"
